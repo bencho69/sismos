@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sismos
+        psr4_prefix: Sismos
+        src_path: app
