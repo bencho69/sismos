@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title>
+        SisMOS
+    </title> 
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+<BODY>
+   <?php echo $__env->make('menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<section id="info">
+</section>
+        <main>
+            
+
+            <?php echo $__env->yieldContent('content'); ?>
+
+            <section id="info">
+                <h3>Actividades para saber el nivel de vulnerabilidad ante un sismo.</h3>
+                <div class="contenedor">
+                    <div class="info-tema">
+                        <img src="img/sentisismo.jpg" alt="">
+                        <h4>¿Sentiste un sismo?</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="img/curvaisosista.jpg" alt="">
+                        <h4>¿Curvas isosistas?</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="img/zonavulnerable2.jpg" alt="">
+                        <h4>¿Que zonas son vulnerables?</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="img/estoybien2.jpg" alt="">
+                        <h4>¿Cómo estan las personas?</h4>
+                    </div>                    
+                </div>
+            </section>
+        </main>
+        
+    <?php echo $__env->make('pie', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+</body>
+</html>

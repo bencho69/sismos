@@ -1,0 +1,7 @@
+<?php $__env->startSection('content'); ?>  
+   <section id="blog">
+      <p>Error: Accion no Autorizada. Disculpe las molestias.</p>
+   </section>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.info', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

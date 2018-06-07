@@ -1,0 +1,31 @@
+<?php $message=Session::get('message'); $errors=0; ?>
+<?php if(count($errors>0)): ?> 
+<?php endif; ?>
+
+<?php $__env->startSection('content'); ?>  
+   <section id="blog">
+   	<form action="log.store " method="post">
+       {!! csrf_field() !! }
+       <div class="form-group">
+       	   <label for="">Nombre</label>
+       	   <input type="text" name="nombre" class="form-control">
+       </div>
+       <div class="form-group">
+       	   <label for="">Correo</label>
+       	   <input type="email" name="email" class="form-control" required autofocus>
+       </div>  	   
+       <div class="form-group">
+       	   <label for="">Contraseña:</label>
+       	   <input type="password  " name="password" class="form-control">
+       </div>
+           <label>
+           <input type="checkbox" name="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>> Recordarme
+           </label>
+       <button class="btn btn-primary">Iniciar</button> 
+   	</form>
+   </section>
+
+  <?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.info', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

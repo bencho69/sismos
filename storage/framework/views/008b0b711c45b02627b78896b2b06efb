@@ -1,0 +1,115 @@
+<?php $__env->startSection('content'); ?>
+  <section class="content">
+    <?php echo $__env->make('alerts.success', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <div class="box" style="min-height: 75px">
+          <?php echo Form::open(['route'=>['encuestas.sel_sismo', $prim_sis],'method'=>'GET']); ?>                    
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Sismo a mostrar:</label> 
+                    <div class="col-sm-10">
+                    <select name="sismo" class="form-control" onchange="this.form.action+this.value; this.disable = true; this.form.submit();"> 
+                      <?php foreach($sismos as $sismo): ?>
+                        <?php if($sismo->id==$prim_sis): ?>
+                           <option value="<?php echo e($sismo->id); ?>" selected><?php echo e($sismo->fecha); ?></option> 
+                        <?php else: ?>
+                           <option value="<?php echo e($sismo->id); ?>"><?php echo e($sismo->fecha); ?></option>
+                        <?php endif; ?>
+                      <?php endforeach; ?>
+                    </select>
+                     Tipo Encuesta :
+                     <?php if($tipo=='perfecta'): ?>
+                       <input type="radio" name="tipo" value="perfecta" onchange="this.form.action+this.value; this.disable = true; this.form.submit();" checked> Perfecta 
+                     <?php else: ?>
+                       <input type="radio" name="tipo" value="perfecta" onchange="this.form.action+this.value; this.disable = true; this.form.submit();"> Perfecta   
+                     <?php endif; ?>
+                     <?php if($tipo=="imperfecta"): ?>
+                       <input type="radio" name="tipo" value="imperfecta" onchange="this.form.action+this.value; this.disable = true; this.form.submit();" checked> Todas
+                    <?php else: ?>
+                       <input type="radio" name="tipo" value="imperfecta" onchange="this.form.action+this.value; this.disable = true; this.form.submit();"> Todas 
+                    <?php endif; ?> 
+                    </div> 
+                </div>
+          <?php echo Form::close(); ?> 
+      </div>
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3   class="box-title">Lista de Encuestas</h3>
+        </div>        
+        <div class="box-body">
+          <table class="table">
+            <thead>
+              <tr>
+             <th>id</th>
+             <th>Sismo</th>
+             <th>Latitud</th>
+             <th>Longitud</th>
+             <th>intensidad</th>  
+             <th>confianza</th>             
+             <th>Acciones</th>
+             </tr>
+            </thead>
+
+            <?php foreach($encuestas as $encuesta): ?>
+            <tbody>              
+              <td><?php echo e($encuesta->id); ?></td>
+              <td><?php echo e($encuesta->sismo_id); ?></td>
+              <td><?php echo e($encuesta->latitud); ?></td>
+              <td><?php echo e($encuesta->longitud); ?></td>
+              <td><?php echo e($encuesta->intensidad); ?></td>
+              <td><?php echo e($encuesta->confianza); ?></td>
+              <!-- Boton Editar -->
+              <td>
+                <div style="display: inline-block; padding: 0px; border: hidden; margin: 0px; ">
+                  <div style="border: hidden; display: inline-block; border: none; color: white; padding: 0px 0px; text-decoration: none; margin: 4px 2px; cursor: pointer;">
+
+                   <a href="<?php echo e(route('encuestas.edit',['id'=>$encuesta->id])); ?>" class="btn btn-success" >Editar</a>
+                  </div>
+                  <!-- Boton Borrar -->
+                  <div style="padding-left: 5px; border: hidden; display: inline-block; ">
+                    <?php echo Form::open(['route'=>['encuestas.destroy',$encuesta->id],'method'=>'DELETE']); ?>
+
+                       <?php echo Form::submit('Borrar', ['class'=>'btn btn-danger','onclick'=>'return confirm("Esta seguro de borrar esta encuesta ?")']); ?>
+
+                    <?php echo Form::close(); ?> 
+                  </div>
+                 </div>
+              </td>
+            </tbody>              
+            <?php endforeach; ?>
+
+        </table>
+        </div>
+        <!-- /.box-body -->
+          <div class="box-footer">
+              <div class="list-inline" > <?php echo $encuestas->render(); ?></div> 
+          </div>
+          <div class="box-footer">
+              <div class="list-inline" > Encuestas : ( <?php echo $encuestas->total(); ?> )</div> 
+              <?php echo Form::open(['route'=>['reportes.cual',$prim_sis],'method'=>'GET']); ?>
+
+                       <?php echo Form::submit('Reportar', ['class'=>'btn btn-danger']); ?>
+
+                    <?php echo Form::close(); ?>
+
+          </div>
+          
+        <!-- /.box-footer-->
+      </div>
+  </section>
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content-header'); ?>
+  <section class="content-header">
+      <h1>
+        Encuestas que administrar <br>
+        <small>Utilice esta sección para ver y administrar las encuestas, que contestan los usuarios.</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li class="active">Encuestas</li>
+      </ol>
+    </section>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,7 @@
+<?php if(Session::has('message-error')): ?>
+ <div class="alert alert-danger  alert-dismissable">
+ 	<a href="#" class="close" data-dismiss="alert" aria-label="Cerrar">×</a>
+ 	<?php echo e(Session::get('message-error')); ?>
+
+ </div>
+<?php endif; ?>

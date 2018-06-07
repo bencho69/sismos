@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html>
+    <?php echo $__env->yieldContent('content'); ?>
+</html>
+
